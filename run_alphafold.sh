@@ -143,7 +143,7 @@ if [[ "$run_feature" == "" ]] ; then
 fi
 
 if [[ "$use_gpu_relax" == "" ]] ; then
-    use_gpu_relax=true
+    use_gpu_relax=false
 fi
 
 
@@ -211,7 +211,7 @@ if [[ "$model_preset" == "multimer" ]] ; then
 fi
 
 # Run AlphaFold with required parameters
-python $alphafold_script \
+echo " $alphafold_script \
 --fasta_paths=$fasta_path \
 --model_names=$model_selection \
 --data_dir=$data_dir \
@@ -240,4 +240,4 @@ python $alphafold_script \
 --use_gpu_relax=$use_gpu_relax \
 --recycling=$recycling \
 --run_feature=$run_feature \
---logtostderr
+--logtostderr "
