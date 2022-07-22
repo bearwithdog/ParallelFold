@@ -30,7 +30,8 @@ For CUDA 11, you can refer to the [installation guide here](./docs/install.md).
 
 For CUDA 10.1, you can refer to the [installation guide here](./docs/install_cuda10.md).
 
-For ROCM platform as follows,propose use miniconda install parafold environment.
+For ROCM platform as follows,propose use miniconda install parafold environment.  
+```shell
 wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.9.2-Linux-x86_64.sh
 mkdir -p ~/miniconda3
 sh  Miniconda3-py37_4.9.2-Linux-x86_64.sh
@@ -43,17 +44,17 @@ pip install -r setup/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simpl
 pip install /public/software/apps/DeepLearning/whl/dtk-22.04/tensorflow-2.7.0_dtk22.04-cp38-
 cp38-linux_x86_64.whl -i https://pypi.tuna.tsinghua.edu.cn/simple/
 
-"unload jaxlib and install rocm jaxlib" 
+#unload jaxlib and install rocm jaxlib" 
 pip uninstall jaxlib -y
 pip install /public/software/apps/DeepLearning/whl/dtk-22.04.2/jaxlib-0.3.14-cp38-none-manylinux2014_x86_64.whl -i https://pypi.tuna.tsinghua.edu.cn/simple/
 
-"patch for jaxlib"
-work_path="\$PWD"
+#patch for jaxlib
+work_path="$PWD"
 a="$(which python)"
 cd "$(dirname "$(dirname "$a")")/lib/python3.8/site-packages"
 patch -p0 < "$work_path/setup/openmm.patch"
 patch -p1 < "$work_path/setup/jax_0.3.14_ROCM.patch"
-
+```
 
 ## Some detail information of modified files
 
@@ -65,8 +66,8 @@ patch -p1 < "$work_path/setup/jax_0.3.14_ROCM.patch"
 
 ## How to run
 
-Visit the [usage page](./docs/usage.md) to know how to run.
-for example 
+Visit the [usage page](./docs/usage.md) to know how to run.  
+there is a difference in rocm,"run_alphafold.sh" script can not execute independent. for example     
 ```bash
 python `sh ./run_alphafold.sh \
 -d data \
